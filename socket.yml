@@ -1,0 +1,48 @@
+name: intercom-add-lead
+version: 0.0.3
+description: Simple Intercom integration for adding leads
+
+endpoints:
+  add_lead:
+    description: Endpoint for creating Intercom leads
+    file: scripts/add_lead.js
+    parameters:
+      email:
+        type: string
+        description: "Lead email address"
+      custom_attributes:
+        type: object
+        description: "Object containing user custom properties"
+      env:
+        type: string
+        description: "'production' or 'staging'"
+    response:
+      mimetype: application/json
+      success:
+        exit_code: 200
+        description: Successful call returns an Intercom lead object (example response truncated for brevity)
+        example: |
+          {
+            "type":"contact",
+            "id":"59f0ab0ce3434ee9157619f0",
+            "user_id":"e91a37df-29b7-4a2d-a442-3f1679c000a8",
+            "anonymous":true,
+            "email":"raiden@thunder.com",
+            "pseudonym":"Indigo Van",
+            "app_id":"ijawqkr9",
+            "created_at":1508944652,
+            "updated_at":1508944652,
+            "custom_attributes":{"company":"God of thunder","name":"Raiden","enterprise":true}
+          }
+
+config:
+  production:
+    description: Intercom production environment access token.
+    long_description: |
+      Can be found in settings > app settings > API Keys in Intercom.
+    required: true
+  staging:
+    description: Intercom staging environment access token.
+    long_description: |
+      Can be found in settings > app settings > API Keys in Intercom. Remember to choose the test app
+    required: false
